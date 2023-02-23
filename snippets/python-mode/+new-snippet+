@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: plot
+# key: plot
+# --
+
+plt.figure()
+plt.plot(${1:xvalues}, ${2:yvalues})
+plt.show()
+$0

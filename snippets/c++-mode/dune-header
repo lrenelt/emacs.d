@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: dune-header-guard
+# key: headerguard
+# --
+
+#ifndef DUNE_ULTRAWEAK_${1:FILENAME}_HH
+#define DUNE_ULTRAWEAK_$1_HH
+
+$0
+
+#endif  // DUNE_ULTRAWEAK_$1_HH
