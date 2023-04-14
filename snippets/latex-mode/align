@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: align
+# key: al
+# --
+\begin{align*}\label{eq:$1}
+  $0
+\end{align*}
