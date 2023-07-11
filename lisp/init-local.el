@@ -18,28 +18,7 @@
 (add-hook 'objc-mode-hook 'irony-mode)
 (add-hook 'irony-mode-hook 'irony-cbd-autosetup-compile-options)
 
-
-(setq dune-directory "~/dune/")
-
-(defun dune-test ()
-  (interactive)
-  "Simple test function."
-  (when (yes-or-no-p "Hello?")
-    (message dune-directory)))
-
-
-;;; dune commands
-(defun dune-configure ()
-  (interactive)
-  (start-process
-   "dune-configure"
-   "*dune-configure*"
-   "./dune-common/bin/dunecontrol"
-   "--opts=ultraweak.opts --only=dune-ultraweak"))
-
-(defun dune-compile ()
-  (interactive)
-  (setq target (read-string "Input target name: "))
-  ())
+;;; include DUNE macros
+(require 'init-dune nil t)
 
 (provide 'init-local)
