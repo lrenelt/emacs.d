@@ -6,13 +6,18 @@
 (defvar defaultOptsFile "default.opts")
 (defvar lastCompiledModule "")
 
+(defun isOptsFile (candidate)
+  (or (string-match ".*.opts$" candidate)
+      (directory-name-p candidate))
+  )
+
 ;;; run configure via dunecontrol
 (defun dune-configure ()
   (interactive)
   (let ((default-directory dune-directory)
         (optsFile
-         (read-string
-          "opts-file to use: " defaultOptsFile))
+         (read-file-name
+          "Choose the opts-file: " dune-directory defaultOptsFile nil "" 'isOptsFile))
         (moduleName
          (read-string
           "DUNE-module to configure: " lastCompiledModule))
@@ -34,10 +39,14 @@
          (shell-command-to-string
           (concat "grep -i BUILDDIR " optsFile)) 0 -1)
         )
-  (if (string-match "BUILDDIR *= *" builddir)
-      (setq builddir (replace-match "" nil nil builddir))
-    (message
-     (concat "Could not determine build directory from opts-file " optsFile) ". Please specify it via BUILDDIR=..."))
+  (setq builddir
+        (if (string-match "BUILDDIR *= *" builddir)
+            (replace-match "" nil nil builddir)
+          (read-directory-name
+           "Could not determine build directory from opts-file. Please specify manually: "
+           dune-directory)
+          )
+        )
   (file-name-as-directory builddir)
   )
 
@@ -47,8 +56,8 @@
   (let ((default-directory dune-directory)))
   (setq
    optsFile
-   (read-string
-    "opts-file to use: " defaultOptsFile))
+   (read-file-name
+    "Choose the opts-file: " dune-directory defaultOptsFile nil "" 'isOptsFile))
   (shell-command
    (format "rm -r %s" (dune-find-builddir optsFile))
    )
@@ -69,8 +78,8 @@
          (read-string
           "Compilation target: " lastTarget))
         (optsFile
-         (read-string
-          "opts-file to use: " defaultOptsFile))
+         (read-file-name
+          "Choose the opts-file: " dune-directory defaultOptsFile nil "" 'isOptsFile))
         (moduleName
          (read-string
           "Compile in the following module? " lastCompiledModule))
