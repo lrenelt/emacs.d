@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: minipages_split
+# key: minipage2
+# --
+
+\begin{minipage}[c]{${1:0.45}\textwidth}
+  $0
+\end{minipage}
+\hfill
+\begin{minipage}[c]{${1:$(- 0.9 (string-to-number yas-text))}\textwidth}
+  
+\end{minipage}
+
