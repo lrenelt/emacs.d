@@ -10,6 +10,7 @@
 (add-to-list 'load-path
              "~/.emacs.d/plugins/yasnippet")
 (require 'yasnippet)
+(require 'yasnippet-snippets)
 (yas-global-mode 1)
 
 ;;; enable irony-mode for c-files
@@ -28,6 +29,9 @@
 
 ;;; include DUNE macros
 (require 'init-dune nil t)
+
+;;; load AucTeX
+(package-install 'use-package)
 
 ;;; load reftex in latex mode
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)

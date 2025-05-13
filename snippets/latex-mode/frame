@@ -2,6 +2,6 @@
 # name: frame
 # key: frame
 # --
-\begin{frame}[fragile]{${1:frametitle}}
+\begin{frame}{${1:frametitle}}
   $0
 \end{frame}
